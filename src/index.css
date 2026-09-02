@@ -1,0 +1,75 @@
+/* STREAMING_CHUNK:Configuring Tailwind CSS directives and theme defaults... */
+@import "tailwindcss";
+
+/* 註：若你使用的是 Tailwind CSS v3，請改用以下三行指令：
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+*/
+
+/* STREAMING_CHUNK:Setting global dark theme base styles... */
+:root {
+color-scheme: dark;
+}
+
+html {
+scroll-behavior: smooth;
+}
+
+body {
+margin: 0;
+padding: 0;
+background-color: #070B14;
+color: #f1f5f9;
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+min-height: 100vh;
+overflow-x: hidden;
+-webkit-font-smoothing: antialiased;
+}
+
+/* STREAMING_CHUNK:Adding custom utilities for scrollbars... /
+/ 隱藏橫向滾動條（如選單分類欄） */
+.no-scrollbar::-webkit-scrollbar {
+display: none;
+}
+.no-scrollbar {
+-ms-overflow-style: none;
+scrollbar-width: none;
+}
+
+/* 全局深色精美滾動條 */
+::-webkit-scrollbar {
+width: 8px;
+height: 8px;
+}
+
+::-webkit-scrollbar-track {
+background: #050810;
+}
+
+::-webkit-scrollbar-thumb {
+background: #1e1b4b;
+border-radius: 9999px;
+border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+background: #3b0764;
+}
+
+/* STREAMING_CHUNK:Defining custom background texture and animations... /
+/ 星空奇幻微光動畫 */
+@keyframes pulseGlow {
+0%, 100% {
+opacity: 0.6;
+filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.4));
+}
+50% {
+opacity: 1;
+filter: drop-shadow(0 0 22px rgba(34, 211, 238, 0.8));
+}
+}
+
+.animate-pulse-glow {
+animation: pulseGlow 4s infinite ease-in-out;
+}
