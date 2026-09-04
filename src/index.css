@@ -1,7 +1,13 @@
+/* STREAMING_CHUNK:Configuring Tailwind CSS directives and theme defaults... */
+@import "tailwindcss";
+
+/* 註：若你使用的是 Tailwind CSS v3，請改用以下三行指令：
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+*/
 
+/* STREAMING_CHUNK:Setting global dark theme base styles... */
 :root {
 color-scheme: dark;
 }
@@ -21,7 +27,8 @@ overflow-x: hidden;
 -webkit-font-smoothing: antialiased;
 }
 
-/* 隱藏橫向滾動條 */
+/* STREAMING_CHUNK:Adding custom utilities for scrollbars... /
+/ 隱藏橫向滾動條（如選單分類欄） */
 .no-scrollbar::-webkit-scrollbar {
 display: none;
 }
@@ -50,7 +57,8 @@ border: 1px solid rgba(139, 92, 246, 0.2);
 background: #3b0764;
 }
 
-/* 星空奇幻微光動畫 */
+/* STREAMING_CHUNK:Defining custom background texture and animations... /
+/ 星空奇幻微光動畫 */
 @keyframes pulseGlow {
 0%, 100% {
 opacity: 0.6;
