@@ -1,4 +1,5 @@
 import React from 'react';
+import { Moon, Sparkles, Map, Ticket, Home, Hotel, Film, Shield, Menu, X } from 'lucide-react';
 
 export function Navbar({ activeTab, setActiveTab }) {
   return (
