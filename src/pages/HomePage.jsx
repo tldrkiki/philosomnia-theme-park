@@ -1,73 +1,3 @@
-import { PARK_ZONES, ATTRACTIONS_DATA } from './data/parkData';
-
-export function Navbar({ activeTab, setActiveTab, itineraryCount, openItinerary }) {
-  return (
-    <header className="sticky top-0 z-40 bg-[#0A0F1C]/90 backdrop-blur-xl border-b border-violet-500/20 shadow-[0_4px_30px_rgba(139,92,246,0.08)]">
-      <div className="bg-[#050810] px-4 py-1.5 text-xs text-slate-400 border-b border-violet-900/30 flex justify-between items-center max-w-7xl mx-auto">
-        <div className="flex items-center space-x-4">
-          <span className="flex items-center gap-1.5 text-cyan-300/90">
-            <Moon className="w-3.5 h-3.5" /> 樂園開放時間：每日 15:00 - 26:00 (02:00 AM)
-          </span>
-          <span className="hidden md:inline text-slate-600">|</span>
-          <span className="hidden md:inline text-slate-500">失眠鎮邏各斯大娛樂家 · 初代反斗俠創立</span>
-        </div>
-        <div className="flex items-center space-x-4">
-          <button className="hover:text-cyan-300 transition flex items-center gap-1.5">
-            <User className="w-3.5 h-3.5" /> 登入 / 入境登記
-          </button>
-          <span className="text-slate-700">|</span>
-          <span className="text-violet-300/90 font-medium">繁體中文 (邏各斯語)</span>
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-        <div 
-          onClick={() => setActiveTab('home')}
-          className="cursor-pointer flex items-center gap-3 group"
-        >
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-500 via-fuchsia-500 to-cyan-400 p-[2px] shadow-lg shadow-violet-500/30 group-hover:scale-105 transition-transform duration-300">
-            <div className="w-full h-full bg-[#070B14] rounded-full flex items-center justify-center">
-              <Sparkles className="w-5 h-5 text-cyan-300" />
-            </div>
-          </div>
-          <div>
-            <div className="text-xl md:text-2xl font-black tracking-wider bg-gradient-to-r from-violet-200 via-fuchsia-300 to-cyan-300 bg-clip-text text-transparent font-serif">
-              失眠夜遊樂園
-            </div>
-            <div className="text-[10px] tracking-[0.2em] text-violet-400/70 uppercase font-sans">
-              Philosomnia Park
-            </div>
-          </div>
-        </div>
-
-        <nav className="hidden lg:flex items-center space-x-1 font-medium text-sm">
-          <button onClick={() => setActiveTab('home')} className={`px-3.5 py-2 rounded-xl transition ${activeTab === 'home' ? 'bg-violet-500/20 text-violet-200 font-bold' : 'text-slate-400 hover:text-cyan-300 hover:bg-violet-950/40'}`}>首頁</button>
-          <button onClick={() => setActiveTab('map')} className={`px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 ${activeTab === 'map' ? 'bg-violet-500/20 text-violet-200 font-bold' : 'text-slate-400 hover:text-cyan-300 hover:bg-violet-950/40'}`}>
-            <Compass className="w-4 h-4 text-cyan-400" /> 樂園地圖
-          </button>
-          <button onClick={() => setActiveTab('attractions')} className={`px-3.5 py-2 rounded-xl transition ${activeTab === 'attractions' ? 'bg-violet-500/20 text-violet-200 font-bold' : 'text-slate-400 hover:text-cyan-300 hover:bg-violet-950/40'}`}>遊樂設施</button>
-          <button onClick={() => setActiveTab('shows')} className={`px-3.5 py-2 rounded-xl transition ${activeTab === 'shows' ? 'bg-violet-500/20 text-violet-200 font-bold' : 'text-slate-400 hover:text-cyan-300 hover:bg-violet-950/40'}`}>娛樂表演</button>
-        </nav>
-
-        <div className="flex items-center gap-3">
-          <button 
-            onClick={openItinerary}
-            className="relative p-2.5 rounded-full bg-violet-950/50 border border-violet-500/30 hover:border-cyan-400 text-cyan-300 transition"
-            title="我的行程"
-          >
-            <Calendar className="w-4 h-4" />
-            {itineraryCount > 0 && (
-              <span className="absolute -top-1 -right-1 w-5 h-5 bg-fuchsia-500 text-white rounded-full text-[10px] font-bold flex items-center justify-center animate-pulse">
-                {itineraryCount}
-              </span>
-            )}
-          </button>
-        </div>
-      </div>
-    </header>
-  );
-}
-
 export function HomePage({ setActiveTab, setSelectedAttraction }) {
   return (
     <div>
@@ -84,11 +14,14 @@ export function HomePage({ setActiveTab, setSelectedAttraction }) {
         {/* Floating Hero Content */}
         <div className="absolute inset-0 flex items-center justify-center text-center px-4">
           <div className="max-w-3xl space-y-5">
-            <p className="text-cyan-200/90 text-sm md:text-base font-medium flex items-center justify-center gap-2">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-violet-500/15 border border-violet-400/30 text-violet-200 text-xs md:text-sm font-medium backdrop-blur-md">
               <Sparkles className="w-4 h-4 text-cyan-300" /> 現實與異世界交織的奇幻國度
-            </p>
-            <h1 className="text-4xl md:text-7xl font-black text-white tracking-wide font-serif leading-tight drop-shadow-lg">
-              失眠夜遊樂園
+            </div>
+            <h1 className="text-3xl md:text-6xl font-black text-white tracking-wide font-serif leading-tight drop-shadow-lg">
+              失眠夜遊樂園<br />
+              <span className="text-xl md:text-3xl font-light text-cyan-200/90 mt-2 block font-sans">
+                「我嘅目標係設計出世界上最偉大嘅遊戲！」
+              </span>
             </h1>
             <p className="text-slate-300/90 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
               初代反斗俠於鎮民大會提出快樂生活方案。邀請你用自己雙腳遊歷異世界，遇見大千世界中探索的朋友，留下難忘回憶！
@@ -181,21 +114,36 @@ export function HomePage({ setActiveTab, setSelectedAttraction }) {
             </div>
           ))}
         </div>
+
+        {/* Park Highlights Banner */}
+        <div className="bg-gradient-to-r from-violet-950/50 via-[#0C1220] to-cyan-950/40 border border-violet-500/25 rounded-3xl p-8 md:p-12 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-fuchsia-500/10 via-transparent to-transparent pointer-events-none" />
+          <div className="space-y-4 max-w-xl relative z-10">
+            <span className="text-xs uppercase tracking-widest text-fuchsia-300 font-bold">
+              尊享特別禮遇 · 生日之星
+            </span>
+            <h3 className="text-2xl md:text-3xl font-serif font-bold text-white">
+              當日壽星入園，解鎖專屬異世界祝福！
+            </h3>
+            <p className="text-slate-300 text-sm leading-relaxed">
+              憑身份證明文件領取生日徽章，即享免費失眠鎮招牌星星奶乙杯、免費租借凹凸凹凸乙隻、歌瑪園特快通行證、向日葵電台點歌及北極光肖像投映！
+            </p>
+            <button 
+              onClick={() => setActiveTab('tickets')}
+              className="bg-gradient-to-r from-fuchsia-500 to-violet-500 hover:from-fuchsia-400 hover:to-violet-400 text-white font-bold px-6 py-2.5 rounded-full text-sm transition shadow-lg shadow-fuchsia-500/20"
+            >
+              查看會員與生日禮遇
+            </button>
+          </div>
+          <div className="w-full md:w-80 h-48 rounded-2xl overflow-hidden border border-violet-400/20 shadow-2xl flex-shrink-0 relative z-10">
+            <img 
+              src="https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=800&q=80" 
+              alt="星星奶與特權" 
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
       </div>
-    </div>
-  );
-}
-
-export default function App() {
-  const [activeTab, setActiveTab] = useState('home');
-  const [selectedAttraction, setSelectedAttraction] = useState(null);
-
-  return (
-    <div className="min-h-screen bg-[#070B14] text-slate-100 flex flex-col">
-      <Navbar activeTab={activeTab} setActiveTab={setActiveTab} itineraryCount={0} openItinerary={() => {}} />
-      <main className="flex-1">
-        <HomePage setActiveTab={setActiveTab} setSelectedAttraction={setSelectedAttraction} />
-      </main>
     </div>
   );
 }
