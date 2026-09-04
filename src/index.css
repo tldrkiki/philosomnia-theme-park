@@ -1,11 +1,11 @@
-/* STREAMING_CHUNK:Configuring Tailwind CSS directives and theme defaults... */
-@import "tailwindcss";
+/* STREAMING_CHUNK:Configuring Tailwind CSS directives and theme defaults...
+@import "tailwindcss";*/
 
-/* 註：若你使用的是 Tailwind CSS v3，請改用以下三行指令：
+/* 註：若你使用的是 Tailwind CSS v3，請改用以下三行指令：*/
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-*/
+
 
 /* STREAMING_CHUNK:Setting global dark theme base styles... */
 :root {
