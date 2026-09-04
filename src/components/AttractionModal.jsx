@@ -1,3 +1,4 @@
+import React from 'react';
 export function AttractionModal({ selectedAttraction, setSelectedAttraction }) {
   if (!selectedAttraction) return null;
 
