@@ -1,4 +1,6 @@
 import React from 'react';
+import { Moon, Sparkles, Map, Ticket, Home, Hotel, Film, Shield, Menu, X } from 'lucide-react';
+
 export function Footer({ setActiveTab }) {
   return (
     <footer className="bg-[#050810] border-t border-violet-900/30 py-12 px-4 text-xs text-slate-500">
