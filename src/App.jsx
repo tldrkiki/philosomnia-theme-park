@@ -1,3 +1,15 @@
+import { useState } from 'react';
+import { Navbar } from './components/Navbar';
+import { Footer } from './components/Footer';
+import { AttractionModal } from './components/AttractionModal';
+import { HomePage } from './pages/HomePage';
+import { MapPage } from './pages/MapPage';
+import { AttractionsPage } from './pages/AttractionsPage';
+import { ShowsPage } from './pages/ShowsPage';
+import { HotelPage } from './pages/HotelPage';
+import { TicketsPage } from './pages/TicketsPage';
+import { RulesPage } from './pages/RulesPage';
+
 export default function App() {
   // Page Tab state (home, map, attractions, shows, hotel, tickets, rules)
   const [activeTab, setActiveTab] = useState('home');
