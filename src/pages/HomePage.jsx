@@ -14,9 +14,9 @@ export function HomePage({ setActiveTab, setSelectedAttraction }) {
         {/* Floating Hero Content */}
         <div className="absolute inset-0 flex items-center justify-center text-center px-4">
           <div className="max-w-3xl space-y-5">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-violet-500/15 border border-violet-400/30 text-violet-200 text-xs md:text-sm font-medium backdrop-blur-md">
+            <p className="text-cyan-200/90 text-sm md:text-base font-medium flex items-center justify-center gap-2">
               <Sparkles className="w-4 h-4 text-cyan-300" /> 現實與異世界交織的奇幻國度
-            </div>
+            </p>
             <h1 className="text-3xl md:text-6xl font-black text-white tracking-wide font-serif leading-tight drop-shadow-lg">
               失眠夜遊樂園<br />
               <span className="text-xl md:text-3xl font-light text-cyan-200/90 mt-2 block font-sans">
