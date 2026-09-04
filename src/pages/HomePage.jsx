@@ -25,7 +25,7 @@ export function HomePage({ setActiveTab, setSelectedAttraction }) {
         {/* Floating Hero Content */}
         <div className="absolute inset-0 flex items-center justify-center text-center px-4">
           <div className="max-w-3xl space-y-5">
-            <div className="text-xl md:text-2xl font-light text-cyan-200/90 tracking-wide">
+            <div className="text-sm md:text-base font-light text-white tracking-wide">
               <Sparkles className="w-4 h-4 text-cyan-300" /> 現實與異世界交織的奇幻國度
             </div>
             <h1 className="text-3xl md:text-6xl font-black text-white tracking-wide font-serif leading-tight drop-shadow-lg">
