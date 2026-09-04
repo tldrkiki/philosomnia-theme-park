@@ -1,3 +1,5 @@
+import React from 'react';
+
 export function Navbar({ activeTab, setActiveTab }) {
   return (
     <header className="sticky top-0 z-40 bg-[#0A0F1C]/90 backdrop-blur-xl border-b border-violet-500/20 shadow-[0_4px_30px_rgba(139,92,246,0.08)]">
