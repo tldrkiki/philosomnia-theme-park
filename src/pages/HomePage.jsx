@@ -1,3 +1,182 @@
+import React, { useState, useMemo } from 'react';
+import { 
+  Search, MapPin, Ticket, Clock, Info, Navigation, Star, 
+  Sparkles, Coffee, Utensils, ShoppingBag, Hotel, ShieldAlert, 
+  Gift, Heart, ChevronRight, X, Layers, SlidersHorizontal, 
+  Music, Tv, Bus, Calendar, User, PhoneCall, Moon, Compass, Check,
+  Share2, AlertCircle, Sparkle, Plus, Trash2, CheckCircle2, Flame, Map as MapIcon
+} from 'lucide-react';
+
+export const PARK_ZONES = [
+  { id: 'logos_main', name: '邏各斯市鎮大街', color: 'bg-amber-500', pos: { x: 50, y: 80 } },
+  { id: 'six_degrees', name: '六度圈之城', color: 'bg-purple-500', pos: { x: 52, y: 55 } },
+  { id: 'underworld', name: '陰間部落', color: 'bg-indigo-600', pos: { x: 45, y: 30 } },
+  { id: 'ice_snow', name: '邏各斯冰雪樂園', color: 'bg-cyan-400', pos: { x: 22, y: 35 } },
+  { id: 'dream_zone', name: '夢境與大千世界', color: 'bg-emerald-500', pos: { x: 75, y: 40 } },
+  { id: 'school_zone', name: '聖邏各斯中學區', color: 'bg-rose-500', pos: { x: 78, y: 70 } }
+];
+
+export const ATTRACTIONS_DATA = [
+  {
+    id: 'att-1',
+    name: '邏各斯時空穿梭歷險',
+    category: 'rides',
+    categoryName: '精選機動遊戲',
+    zone: 'six_degrees',
+    zoneName: '六度圈之城',
+    height: '任何高度',
+    hours: '15:00 - 25:30',
+    coords: { x: 48, y: 58 },
+    image: 'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=800&q=80',
+    summary: '走進失眠圖書館，由邏各斯虛擬精靈妙音帶你穿梭邏各斯不同歷史時空，於虛擬實境中記錄歷史。',
+    description: '走進失眠圖書館，由邏各斯虛擬精靈妙音帶你穿梭邏各斯不同歷史時空，於虛擬實境中為無眠太太記錄和見證失眠鎮不同紀元的歷史事件。（P.S. 不要得罪妙音，裂音隨時出沒）',
+    tags: ['VR體驗', '時空穿梭', '故事導覽']
+  },
+  {
+    id: 'att-2',
+    name: '邏各斯冰雪之旅',
+    category: 'rides',
+    categoryName: '精選機動遊戲',
+    zone: 'ice_snow',
+    zoneName: '邏各斯冰雪樂園',
+    height: '102厘米或以上',
+    hours: '15:00 - 25:45',
+    coords: { x: 20, y: 38 },
+    image: 'https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=800&q=80',
+    summary: '乘坐雪橇列車從雪山頂急速滑下，感受冰冷寒風劃過肌理的極速刺激。',
+    description: '一望無際的邏各斯冰雪樂園新設了一部雪橇列車，讓你先從雪山眺望邏各斯優美的風景，再從山頂急速滑下，感受冰冷寒風劃過肌理的刺激。在速度與零度之間，且看看雪國裡那雪獸會否滲奇香？',
+    tags: ['雪橇過山車', '極速刺激', '雪國景觀']
+  },
+  {
+    id: 'att-3',
+    name: '芝士山大宅',
+    category: 'rides',
+    categoryName: '精選機動遊戲',
+    zone: 'six_degrees',
+    zoneName: '六度圈之城',
+    height: '任何高度',
+    hours: '15:00 - 26:00',
+    coords: { x: 55, y: 50 },
+    image: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=800&q=80',
+    summary: '乘坐自動代步車穿梭豪華大宅，一睹邏各斯最富有家庭的奢華生活與家傳之寶。',
+    description: '在偌大的豪華大宅內，乘坐自動代步車穿梭衣物房、化妝房、健身房、玩具房、睡房、娛樂大廳、按摩院、電影院、卡拉OK室、室內運動場、圖書館、私人花園及博物館，親身探索全邏各斯最有錢家庭金碧輝煌的奢侈生活。你更有機會一睹大宅家傳之寶真身及其珍貴紀錄片！',
+    tags: ['豪宅巡禮', '自動代步車', '家傳之寶']
+  },
+  {
+    id: 'att-4',
+    name: '轉圈轉圈妖怪共你',
+    category: 'rides',
+    categoryName: '精選機動遊戲',
+    zone: 'underworld',
+    zoneName: '陰間部落',
+    height: '任何高度',
+    hours: '15:00 - 26:00',
+    coords: { x: 42, y: 28 },
+    image: 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=800&q=80',
+    summary: '妖怪版旋轉木馬！登上烏狐、窿龍、夢瓜等妖怪坐騎，伴隨陰間悠揚樂韻翩然共舞。',
+    description: '朋友最多，轉圈轉圈妖怪共你～ 烏狐、窿龍、夢瓜等人氣妖怪和他們的一眾朋友都已悉心打扮，圍成一圈，準備就緒！各位大人快快登上這座妖怪版旋轉木馬，伴隨陰間音樂人特製的悠揚樂韻，於陰間一角與那些可愛的小朋友們翩然共舞吧。',
+    tags: ['妖怪旋轉木馬', '親子同樂', '陰間獨家音樂']
+  },
+  {
+    id: 'att-5',
+    name: '盈救時間大作戰！',
+    category: 'rides',
+    categoryName: '精選機動遊戲',
+    zone: 'six_degrees',
+    zoneName: '六度圈之城',
+    height: '任何高度',
+    hours: '15:00 - 25:00',
+    coords: { x: 58, y: 62 },
+    image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=800&q=80',
+    summary: '拿起時間使者法寶槍，透過傳送陣收集時間碎片！記得避開陳八妹的時間碎片。',
+    description: '這是一個來自十年前的求救訊號，「死神好友盈」急需協助！馬上進入駖子小姐以靈力操控的人間傳送陣，拿起時間使者法寶槍，幫陸月盈將灑落的時間碎片一塊一塊收集回來吧。記得千萬別收集楊嘉兒婆婆陳八妹的時間碎片！',
+    tags: ['互動射擊', '時間冒險', '拯救任務']
+  },
+  {
+    id: 'att-6',
+    name: '逃出夢遊之境',
+    category: 'rides',
+    categoryName: '精選機動遊戲',
+    zone: 'dream_zone',
+    zoneName: '夢境與大千世界',
+    height: '110厘米或以上',
+    hours: '16:00 - 25:00',
+    coords: { x: 72, y: 38 },
+    image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80',
+    summary: '在夢貘宮殿裏發個共感夢！限時尋找密碼逃脫，否則夢境將被夢貘大人吞噬。',
+    description: '與親朋好友在夢貘宮殿裏發個共感夢，留意細節，尋找密碼，挑戰一場緊張刺激又神秘莫測的密室逃脫。注意，如果限時之內未能逃出，夢貘大人將會吞噬你的夢境！',
+    tags: ['密室逃脫', '夢境解謎', '限時挑戰']
+  }
+];
+
+export function Navbar({ activeTab, setActiveTab, itineraryCount, openItinerary }) {
+  return (
+    <header className="sticky top-0 z-40 bg-[#0A0F1C]/90 backdrop-blur-xl border-b border-violet-500/20 shadow-[0_4px_30px_rgba(139,92,246,0.08)]">
+      <div className="bg-[#050810] px-4 py-1.5 text-xs text-slate-400 border-b border-violet-900/30 flex justify-between items-center max-w-7xl mx-auto">
+        <div className="flex items-center space-x-4">
+          <span className="flex items-center gap-1.5 text-cyan-300/90">
+            <Moon className="w-3.5 h-3.5" /> 樂園開放時間：每日 15:00 - 26:00 (02:00 AM)
+          </span>
+          <span className="hidden md:inline text-slate-600">|</span>
+          <span className="hidden md:inline text-slate-500">失眠鎮邏各斯大娛樂家 · 初代反斗俠創立</span>
+        </div>
+        <div className="flex items-center space-x-4">
+          <button className="hover:text-cyan-300 transition flex items-center gap-1.5">
+            <User className="w-3.5 h-3.5" /> 登入 / 入境登記
+          </button>
+          <span className="text-slate-700">|</span>
+          <span className="text-violet-300/90 font-medium">繁體中文 (邏各斯語)</span>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+        <div 
+          onClick={() => setActiveTab('home')}
+          className="cursor-pointer flex items-center gap-3 group"
+        >
+          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-500 via-fuchsia-500 to-cyan-400 p-[2px] shadow-lg shadow-violet-500/30 group-hover:scale-105 transition-transform duration-300">
+            <div className="w-full h-full bg-[#070B14] rounded-full flex items-center justify-center">
+              <Sparkles className="w-5 h-5 text-cyan-300" />
+            </div>
+          </div>
+          <div>
+            <div className="text-xl md:text-2xl font-black tracking-wider bg-gradient-to-r from-violet-200 via-fuchsia-300 to-cyan-300 bg-clip-text text-transparent font-serif">
+              失眠夜遊樂園
+            </div>
+            <div className="text-[10px] tracking-[0.2em] text-violet-400/70 uppercase font-sans">
+              Philosomnia Park
+            </div>
+          </div>
+        </div>
+
+        <nav className="hidden lg:flex items-center space-x-1 font-medium text-sm">
+          <button onClick={() => setActiveTab('home')} className={`px-3.5 py-2 rounded-xl transition ${activeTab === 'home' ? 'bg-violet-500/20 text-violet-200 font-bold' : 'text-slate-400 hover:text-cyan-300 hover:bg-violet-950/40'}`}>首頁</button>
+          <button onClick={() => setActiveTab('map')} className={`px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 ${activeTab === 'map' ? 'bg-violet-500/20 text-violet-200 font-bold' : 'text-slate-400 hover:text-cyan-300 hover:bg-violet-950/40'}`}>
+            <Compass className="w-4 h-4 text-cyan-400" /> 樂園地圖
+          </button>
+          <button onClick={() => setActiveTab('attractions')} className={`px-3.5 py-2 rounded-xl transition ${activeTab === 'attractions' ? 'bg-violet-500/20 text-violet-200 font-bold' : 'text-slate-400 hover:text-cyan-300 hover:bg-violet-950/40'}`}>遊樂設施</button>
+          <button onClick={() => setActiveTab('shows')} className={`px-3.5 py-2 rounded-xl transition ${activeTab === 'shows' ? 'bg-violet-500/20 text-violet-200 font-bold' : 'text-slate-400 hover:text-cyan-300 hover:bg-violet-950/40'}`}>娛樂表演</button>
+        </nav>
+
+        <div className="flex items-center gap-3">
+          <button 
+            onClick={openItinerary}
+            className="relative p-2.5 rounded-full bg-violet-950/50 border border-violet-500/30 hover:border-cyan-400 text-cyan-300 transition"
+            title="我的行程"
+          >
+            <Calendar className="w-4 h-4" />
+            {itineraryCount > 0 && (
+              <span className="absolute -top-1 -right-1 w-5 h-5 bg-fuchsia-500 text-white rounded-full text-[10px] font-bold flex items-center justify-center animate-pulse">
+                {itineraryCount}
+              </span>
+            )}
+          </button>
+        </div>
+      </div>
+    </header>
+  );
+}
+
 export function HomePage({ setActiveTab, setSelectedAttraction }) {
   return (
     <div>
@@ -14,14 +193,11 @@ export function HomePage({ setActiveTab, setSelectedAttraction }) {
         {/* Floating Hero Content */}
         <div className="absolute inset-0 flex items-center justify-center text-center px-4">
           <div className="max-w-3xl space-y-5">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-violet-500/15 border border-violet-400/30 text-violet-200 text-xs md:text-sm font-medium backdrop-blur-md">
+            <p className="text-cyan-200/90 text-sm md:text-base font-medium flex items-center justify-center gap-2">
               <Sparkles className="w-4 h-4 text-cyan-300" /> 現實與異世界交織的奇幻國度
-            </div>
-            <h1 className="text-3xl md:text-6xl font-black text-white tracking-wide font-serif leading-tight drop-shadow-lg">
-              失眠夜遊樂園<br />
-              <span className="text-xl md:text-3xl font-light text-cyan-200/90 mt-2 block font-sans">
-                「我嘅目標係設計出世界上最偉大嘅遊戲！」
-              </span>
+            </p>
+            <h1 className="text-4xl md:text-7xl font-black text-white tracking-wide font-serif leading-tight drop-shadow-lg">
+              失眠夜遊樂園
             </h1>
             <p className="text-slate-300/90 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
               初代反斗俠於鎮民大會提出快樂生活方案。邀請你用自己雙腳遊歷異世界，遇見大千世界中探索的朋友，留下難忘回憶！
@@ -114,36 +290,21 @@ export function HomePage({ setActiveTab, setSelectedAttraction }) {
             </div>
           ))}
         </div>
-
-        {/* Park Highlights Banner */}
-        <div className="bg-gradient-to-r from-violet-950/50 via-[#0C1220] to-cyan-950/40 border border-violet-500/25 rounded-3xl p-8 md:p-12 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-fuchsia-500/10 via-transparent to-transparent pointer-events-none" />
-          <div className="space-y-4 max-w-xl relative z-10">
-            <span className="text-xs uppercase tracking-widest text-fuchsia-300 font-bold">
-              尊享特別禮遇 · 生日之星
-            </span>
-            <h3 className="text-2xl md:text-3xl font-serif font-bold text-white">
-              當日壽星入園，解鎖專屬異世界祝福！
-            </h3>
-            <p className="text-slate-300 text-sm leading-relaxed">
-              憑身份證明文件領取生日徽章，即享免費失眠鎮招牌星星奶乙杯、免費租借凹凸凹凸乙隻、歌瑪園特快通行證、向日葵電台點歌及北極光肖像投映！
-            </p>
-            <button 
-              onClick={() => setActiveTab('tickets')}
-              className="bg-gradient-to-r from-fuchsia-500 to-violet-500 hover:from-fuchsia-400 hover:to-violet-400 text-white font-bold px-6 py-2.5 rounded-full text-sm transition shadow-lg shadow-fuchsia-500/20"
-            >
-              查看會員與生日禮遇
-            </button>
-          </div>
-          <div className="w-full md:w-80 h-48 rounded-2xl overflow-hidden border border-violet-400/20 shadow-2xl flex-shrink-0 relative z-10">
-            <img 
-              src="https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=800&q=80" 
-              alt="星星奶與特權" 
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
       </div>
+    </div>
+  );
+}
+
+export default function App() {
+  const [activeTab, setActiveTab] = useState('home');
+  const [selectedAttraction, setSelectedAttraction] = useState(null);
+
+  return (
+    <div className="min-h-screen bg-[#070B14] text-slate-100 flex flex-col">
+      <Navbar activeTab={activeTab} setActiveTab={setActiveTab} itineraryCount={0} openItinerary={() => {}} />
+      <main className="flex-1">
+        <HomePage setActiveTab={setActiveTab} setSelectedAttraction={setSelectedAttraction} />
+      </main>
     </div>
   );
 }
