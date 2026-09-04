@@ -10,6 +10,7 @@ import { HotelPage } from './pages/HotelPage';
 import { TicketsPage } from './pages/TicketsPage';
 import { RulesPage } from './pages/RulesPage';
 
+
 export default function App() {
   // Page Tab state (home, map, attractions, shows, hotel, tickets, rules)
   const [activeTab, setActiveTab] = useState('home');
